@@ -3,7 +3,6 @@
 Tech to use:
 
 TS
-TailwindCSS
 GSAP (maybe)
 Reducer
 Local storage
