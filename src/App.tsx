@@ -6,7 +6,6 @@ import Moon from './assets/images/icon-moon.svg';
 import Logo from './assets/images/logo.svg';
 import Check from './assets/images/icon-check.svg';
 import Sun from './assets/images/icon-sun.svg';
-import BgMobileLight from './assets/images/bg-mobile-light.jpg';
 import { lightTheme, darkTheme } from './Theme.ts';
 
 function App() {
@@ -62,10 +61,8 @@ function App() {
 
 const StyledHeader = styled.header`
   min-height: 20rem;
-  background-image: url('src/assets/images/bg-mobile-light.jpg');
-
+  background-image: url(${(props) => props.theme.backgroundImage});
   background-size: cover;
-
   .wrapper {
     width: 85%;
     max-width: 54rem;

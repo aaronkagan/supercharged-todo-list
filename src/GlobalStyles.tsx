@@ -25,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${(props) => props.theme.bgColor};
   }
 
+
+
 `;
 
 export default GlobalStyle;
