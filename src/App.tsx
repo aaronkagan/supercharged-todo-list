@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyles';
@@ -10,9 +10,57 @@ import { lightTheme, darkTheme } from './Theme.ts';
 
 function App() {
   const [theme, setTheme] = useState('light');
-
   const handleToggleTheme = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
+  };
+
+  interface TodoItem {
+    id: number;
+    title: string;
+    isCompleted: boolean;
+  }
+
+  const [todo, setTodo] = useState<string>('');
+  const [todos, setTodos] = useState<TodoItem[]>(
+    localStorage.getItem('todos')
+      ? JSON.parse(localStorage.getItem('todos')!)
+      : []
+  );
+
+  useEffect(() => {
+    const savedTodos = JSON.parse(localStorage.getItem('todos')!); // the "! says that the result from local storage will not be null"
+    setTodos(savedTodos);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    if (todo.length) {
+      setTodos([...todos, { title: todo, id: Date.now(), isCompleted: false }]);
+      setTodo('');
+    }
+  };
+
+  const handleDelete = (id: number): void => {
+    setTodos(
+      todos.filter((todo) => {
+        return id !== todo.id;
+      })
+    );
+  };
+
+  const handleToggleDone = (id: number) => {
+    setTodos(
+      todos.map((todo) => {
+        return todo.id === id
+          ? // If todo has matching id it copies the todo object and changes only the isCompleted property
+            { ...todo, isCompleted: !todo.isCompleted }
+          : todo;
+      })
+    );
   };
 
   return (
@@ -42,14 +90,45 @@ function App() {
 
       <StyledMain>
         <div className="wrapper">
-          <form className="form">
+          <form
+            className="form"
+            onSubmit={handleSubmit}
+          >
             <button className="submit"></button>
             <input
               className="text-input"
               type="text"
               placeholder="Create a new todo..."
+              value={todo}
+              onChange={(e) => setTodo(e.target.value)}
             />
           </form>
+
+          {todos.length ? (
+            <ul>
+              {todos.map((elem) => {
+                return (
+                  <li key={JSON.stringify(elem.id)}>
+                    <span
+                      style={
+                        elem.isCompleted
+                          ? { textDecoration: 'line-through' }
+                          : {}
+                      }
+                    >
+                      {elem.title}
+                    </span>
+                    <button onClick={() => handleToggleDone(elem.id)}>
+                      Toggle Done
+                    </button>
+                    <button onClick={() => handleDelete(elem.id)}>
+                      Delete Todo
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : null}
         </div>
       </StyledMain>
     </ThemeProvider>
