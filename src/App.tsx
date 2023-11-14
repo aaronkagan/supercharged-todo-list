@@ -5,6 +5,7 @@ import GlobalStyle from './GlobalStyles';
 import Moon from './assets/images/icon-moon.svg';
 import Logo from './assets/images/logo.svg';
 import Check from './assets/images/icon-check.svg';
+import Cross from './assets/images/icon-cross.svg';
 import Sun from './assets/images/icon-sun.svg';
 import { lightTheme, darkTheme } from './Theme.ts';
 
@@ -109,7 +110,12 @@ function App() {
               {todos.map((elem) => {
                 return (
                   <li key={JSON.stringify(elem.id)}>
+                    <div
+                      role="button"
+                      onClick={() => handleToggleDone(elem.id)}
+                    />
                     <span
+                      onClick={() => handleToggleDone(elem.id)}
                       style={
                         elem.isCompleted
                           ? { textDecoration: 'line-through' }
@@ -118,12 +124,12 @@ function App() {
                     >
                       {elem.title}
                     </span>
-                    <button onClick={() => handleToggleDone(elem.id)}>
-                      Toggle Done
-                    </button>
-                    <button onClick={() => handleDelete(elem.id)}>
-                      Delete Todo
-                    </button>
+
+                    <img
+                      src={Cross}
+                      role="button"
+                      onClick={() => handleDelete(elem.id)}
+                    />
                   </li>
                 );
               })}
