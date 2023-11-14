@@ -42,17 +42,14 @@ function App() {
 
       <StyledMain>
         <div className="wrapper">
-          <div className="input-container">
-            <input
-              type="checkbox"
-              className="checkbox"
-            />
+          <form className="form">
+            <button className="submit"></button>
             <input
               className="text-input"
               type="text"
               placeholder="Create a new todo..."
             />
-          </div>
+          </form>
         </div>
       </StyledMain>
     </ThemeProvider>
@@ -85,12 +82,12 @@ const StyledMain = styled.main`
     max-width: 54rem;
     margin: 0 auto;
   }
-  .input-container {
+  .form {
     width: 100%;
-    background-color: white;
+    background-color: ${(props) => props.theme.todoBg};
     display: flex;
     align-items: center;
-    gap: 2.4rem;
+    gap: 1.2rem;
     border-radius: 0.6rem;
     font-size: 1.2rem;
     padding: 2rem 1.4rem;
@@ -98,14 +95,22 @@ const StyledMain = styled.main`
     .text-input {
       outline: none;
       border: none;
+      background-color: inherit;
+      color: ${(props) => props.theme.todoColor};
     }
 
     .text-input::placeholder {
       font-size: 1.2rem;
+      letter-spacing: -0.167px;
+      color: ${(props) => props.theme.todoPlaceholderColor};
     }
 
-    .checkbox {
-      /* visibility: hidden; */
+    .submit {
+      width: 2rem;
+      height: 2rem;
+      background: none;
+      border-radius: 50%;
+      border: 1px solid ${(props) => props.theme.checkCircle};
     }
   }
 `;

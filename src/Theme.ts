@@ -2,12 +2,18 @@ import bgMobileLight from './assets/images/bg-mobile-light.jpg';
 import bgMobileDark from './assets/images/bg-mobile-dark.jpg';
 
 export const lightTheme = {
-  bgColor: '#fff',
-  color: '#000',
-  backgroundImage: bgMobileLight
+  bgColor: '#FAFAFA',
+  backgroundImage: bgMobileLight,
+  checkCircle: '#e3e4f1',
+  todoBg: '#fff',
+  todoColor: '#494C6B',
+  todoPlaceholderColor: '#9495A5'
 };
 export const darkTheme = {
   bgColor: '#000',
-  color: '#fff',
-  backgroundImage: bgMobileDark
+  backgroundImage: bgMobileDark,
+  checkCircle: '#393A4B',
+  todoBg: '#25273D',
+  todoColor: '#C8CBE7',
+  todoPlaceholderColor: '#767992'
 };
