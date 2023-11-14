@@ -1,13 +1,23 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyles';
-
 import Moon from './assets/images/icon-moon.svg';
 import Logo from './assets/images/logo.svg';
 import Check from './assets/images/icon-check.svg';
+import Sun from './assets/images/icon-sun.svg';
+import BgMobileLight from './assets/images/bg-mobile-light.jpg';
+import { lightTheme, darkTheme } from './Theme.ts';
 
 function App() {
+  const [theme, setTheme] = useState('light');
+
+  const handleToggleTheme = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light');
+  };
+
   return (
-    <>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyle />
       <StyledHeader>
         <div className="wrapper">
@@ -22,7 +32,9 @@ function App() {
               />
             </a>
             <img
-              src={Moon}
+              role="button"
+              onClick={handleToggleTheme}
+              src={theme === 'light' ? Moon : Sun}
               alt="Moon Icon"
             />
           </div>
@@ -44,13 +56,14 @@ function App() {
           </div>
         </div>
       </StyledMain>
-    </>
+    </ThemeProvider>
   );
 }
 
 const StyledHeader = styled.header`
   min-height: 20rem;
   background-image: url('src/assets/images/bg-mobile-light.jpg');
+
   background-size: cover;
 
   .wrapper {

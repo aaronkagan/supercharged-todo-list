@@ -21,6 +21,10 @@ const GlobalStyle = createGlobalStyle`
     font: inherit;
   }
 
+  body {
+    background-color: ${(props) => props.theme.bgColor};
+  }
+
 `;
 
 export default GlobalStyle;
