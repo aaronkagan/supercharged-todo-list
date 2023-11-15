@@ -10,6 +10,21 @@ import Sun from './assets/images/icon-sun.svg';
 import { lightTheme, darkTheme } from './Theme.ts';
 
 function App() {
+  const activeFilter = useRef<string>('all');
+
+  const filterAllRef = useRef<HTMLElement>(null);
+  const filterActiveRef = useRef<HTMLElement>(null);
+  const filterCompletedRef = useRef<HTMLElement>(null);
+  const filterRefs = [filterAllRef, filterActiveRef, filterCompletedRef];
+
+  const handleResetFilterLinks = () => {
+    filterRefs.forEach((filterRef) => {
+      if (filterRef.current !== null) {
+        filterRef.current.classList.remove('active-filter-link');
+      }
+    });
+  };
+
   const [theme, setTheme] = useState<string | null>('light');
   const handleToggleTheme = () => {
     if (theme === 'light') {
@@ -23,6 +38,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('theme')) setTheme(localStorage.getItem('theme'));
+    handleActiveFilter();
   }, []);
 
   interface TodoItem {
@@ -51,7 +67,30 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
+    handleActiveFilter();
   }, [todos]);
+
+  const handleActiveFilter = () => {
+    handleResetFilterLinks();
+    if (activeFilter.current === 'all') {
+      setFilteredTodos(todos);
+      if (filterAllRef.current !== null) {
+        filterAllRef.current.classList.add('active-filter-link');
+      }
+    }
+    if (activeFilter.current === 'active') {
+      setFilteredTodos(todos.filter((elem) => !elem.isCompleted));
+      if (filterActiveRef.current !== null) {
+        filterActiveRef.current.classList.add('active-filter-link');
+      }
+    }
+    if (activeFilter.current === 'completed') {
+      setFilteredTodos(todos.filter((elem) => elem.isCompleted));
+      if (filterCompletedRef.current !== null) {
+        filterCompletedRef.current.classList.add('active-filter-link');
+      }
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -78,22 +117,6 @@ function App() {
           : todo;
       })
     );
-  };
-
-  const filterAllRef = useRef<HTMLElement>(null);
-  const filterActiveRef = useRef<HTMLElement>(null);
-  const filterCompletedRef = useRef<HTMLElement>(null);
-  const filterRefs = [filterAllRef, filterActiveRef, filterCompletedRef];
-
-  const handleFilterClick = (ref: RefObject<HTMLElement>) => {
-    if (ref !== null && ref.current !== null) {
-      filterRefs.forEach((filterRef) => {
-        if (filterRef.current !== null) {
-          filterRef.current.classList.remove('active-filter-link');
-        }
-      });
-      ref.current.classList.add('active-filter-link');
-    }
   };
 
   return (
@@ -209,8 +232,8 @@ function App() {
             <span
               ref={filterAllRef}
               onClick={() => {
-                handleFilterClick(filterAllRef);
-                setFilteredTodos(todos);
+                activeFilter.current = 'all';
+                handleActiveFilter();
               }}
             >
               All
@@ -218,8 +241,8 @@ function App() {
             <span
               ref={filterActiveRef}
               onClick={() => {
-                handleFilterClick(filterActiveRef);
-                setFilteredTodos(todos.filter((elem) => !elem.isCompleted));
+                activeFilter.current = 'active';
+                handleActiveFilter();
               }}
             >
               Active
@@ -227,8 +250,8 @@ function App() {
             <span
               ref={filterCompletedRef}
               onClick={() => {
-                handleFilterClick(filterCompletedRef);
-                setFilteredTodos(todos.filter((elem) => elem.isCompleted));
+                activeFilter.current = 'completed';
+                handleActiveFilter();
               }}
             >
               Completed
