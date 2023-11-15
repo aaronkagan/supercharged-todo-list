@@ -109,28 +109,31 @@ function App() {
             <StyledTodoList>
               {todos.map((elem) => {
                 return (
-                  <li key={JSON.stringify(elem.id)}>
-                    <div
-                      role="button"
-                      onClick={() => handleToggleDone(elem.id)}
-                    />
-                    <span
-                      onClick={() => handleToggleDone(elem.id)}
-                      style={
-                        elem.isCompleted
-                          ? { textDecoration: 'line-through' }
-                          : {}
-                      }
-                    >
-                      {elem.title}
-                    </span>
+                  <StyledTodoItem key={JSON.stringify(elem.id)}>
+                    <div className="container">
+                      <div
+                        className="mark-checked"
+                        role="checkbox"
+                        onClick={() => handleToggleDone(elem.id)}
+                      />
+                      <span
+                        onClick={() => handleToggleDone(elem.id)}
+                        style={
+                          elem.isCompleted
+                            ? { textDecoration: 'line-through' }
+                            : {}
+                        }
+                      >
+                        {elem.title}
+                      </span>
+                    </div>
 
                     <img
                       src={Cross}
                       role="button"
                       onClick={() => handleDelete(elem.id)}
                     />
-                  </li>
+                  </StyledTodoItem>
                 );
               })}
               <div className="todoListBottom">
@@ -138,6 +141,7 @@ function App() {
                   {todos.filter((elem) => !elem.isCompleted).length} items left
                 </span>
                 <span
+                  className="clear-completed"
                   onClick={() =>
                     setTodos((prevTodos) =>
                       prevTodos.filter((elem) => !elem.isCompleted)
@@ -242,6 +246,41 @@ const StyledTodoList = styled.ul`
     justify-content: space-between;
     font-size: 1.2rem;
     letter-spacing: -0.167px;
+
+    .clear-completed {
+      cursor: pointer;
+    }
+  }
+`;
+
+const StyledTodoItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 2rem;
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .mark-checked {
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border-radius: 50%;
+    border: 1px solid ${(props) => props.theme.checkCircle};
+    cursor: pointer;
+  }
+
+  span {
+    cursor: pointer;
+  }
+
+  img {
+    cursor: pointer;
+    width: 1.2rem;
   }
 `;
 
