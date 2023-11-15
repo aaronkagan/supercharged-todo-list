@@ -221,6 +221,12 @@ const StyledTodoList = styled.ul`
   background-color: ${(props) => props.theme.todoBg};
 
   .todoListBottom {
+    color: ${(props) => props.theme.todoListBottomColor};
+    padding: 1.6rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    letter-spacing: -0.167px;
   }
 `;
 
