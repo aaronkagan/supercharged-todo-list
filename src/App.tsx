@@ -115,7 +115,27 @@ function App() {
                         className="mark-checked"
                         role="checkbox"
                         onClick={() => handleToggleDone(elem.id)}
-                      />
+                        style={{
+                          background: `${
+                            elem.isCompleted
+                              ? 'linear-gradient(135deg, #55ddff, #c058f3)'
+                              : 'none'
+                          }`
+                        }}
+                      >
+                        <img
+                          style={{
+                            display: `${elem.isCompleted ? 'block' : 'none'}`,
+                            background: `${
+                              elem.isCompleted
+                                ? 'linear-gradient(135deg, #55ddff, #c058f3)'
+                                : 'none'
+                            }`
+                          }}
+                          src={Check}
+                          alt=""
+                        />
+                      </div>
                       <span
                         onClick={() => handleToggleDone(elem.id)}
                         style={
@@ -270,10 +290,15 @@ const StyledTodoItem = styled.li`
   .mark-checked {
     width: 2rem;
     height: 2rem;
-    background: none;
     border-radius: 50%;
     border: 1px solid ${(props) => props.theme.checkCircle};
     cursor: pointer;
+    display: grid;
+    place-items: center;
+
+    img {
+      width: 7.25px;
+    }
   }
 
   span {
