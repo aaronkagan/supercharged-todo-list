@@ -176,6 +176,10 @@ const StyledHeader = styled.header`
     align-items: center;
     padding-top: 4.8rem;
   }
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 const StyledMain = styled.main`
