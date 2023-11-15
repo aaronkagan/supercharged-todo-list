@@ -51,8 +51,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
-    localStorage.setItem('todos', JSON.stringify(filteredTodos));
-  }, [todos, filteredTodos]);
+  }, [todos]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -81,10 +80,10 @@ function App() {
     );
   };
 
-  const filterRef1 = useRef<HTMLElement>(null);
-  const filterRef2 = useRef<HTMLElement>(null);
-  const filterRef3 = useRef<HTMLElement>(null);
-  const filterRefs = [filterRef1, filterRef2, filterRef3];
+  const filterAllRef = useRef<HTMLElement>(null);
+  const filterActiveRef = useRef<HTMLElement>(null);
+  const filterCompletedRef = useRef<HTMLElement>(null);
+  const filterRefs = [filterAllRef, filterActiveRef, filterCompletedRef];
 
   const handleFilterClick = (ref: RefObject<HTMLElement>) => {
     if (ref !== null && ref.current !== null) {
@@ -208,37 +207,28 @@ function App() {
           ) : null}
           <StyledFilterBar>
             <span
-              ref={filterRef1}
+              ref={filterAllRef}
               onClick={() => {
-                handleFilterClick(filterRef1);
+                handleFilterClick(filterAllRef);
                 setFilteredTodos(todos);
-                localStorage.setItem('filteredTodos', JSON.stringify(todos));
               }}
             >
               All
             </span>
             <span
-              ref={filterRef2}
+              ref={filterActiveRef}
               onClick={() => {
-                handleFilterClick(filterRef2);
+                handleFilterClick(filterActiveRef);
                 setFilteredTodos(todos.filter((elem) => !elem.isCompleted));
-                localStorage.setItem(
-                  'filteredTodos',
-                  JSON.stringify(todos.filter((elem) => !elem.isCompleted))
-                );
               }}
             >
               Active
             </span>
             <span
-              ref={filterRef3}
+              ref={filterCompletedRef}
               onClick={() => {
-                handleFilterClick(filterRef3);
+                handleFilterClick(filterCompletedRef);
                 setFilteredTodos(todos.filter((elem) => elem.isCompleted));
-                localStorage.setItem(
-                  'filteredTodos',
-                  JSON.stringify(todos.filter((elem) => elem.isCompleted))
-                );
               }}
             >
               Completed
