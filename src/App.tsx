@@ -106,7 +106,7 @@ function App() {
           </form>
 
           {todos.length ? (
-            <ul>
+            <StyledTodoList>
               {todos.map((elem) => {
                 return (
                   <li key={JSON.stringify(elem.id)}>
@@ -133,7 +133,21 @@ function App() {
                   </li>
                 );
               })}
-            </ul>
+              <div className="todoListBottom">
+                <span>
+                  {todos.filter((elem) => !elem.isCompleted).length} items left
+                </span>
+                <span
+                  onClick={() =>
+                    setTodos((prevTodos) =>
+                      prevTodos.filter((elem) => !elem.isCompleted)
+                    )
+                  }
+                >
+                  Clear Completed
+                </span>
+              </div>
+            </StyledTodoList>
           ) : null}
         </div>
       </StyledMain>
@@ -197,6 +211,16 @@ const StyledMain = styled.main`
       border-radius: 50%;
       border: 1px solid ${(props) => props.theme.checkCircle};
     }
+  }
+`;
+
+const StyledTodoList = styled.ul`
+  list-style-type: none;
+  margin-top: 1.6rem;
+  border-radius: 0.5rem;
+  background-color: ${(props) => props.theme.todoBg};
+
+  .todoListBottom {
   }
 `;
 
