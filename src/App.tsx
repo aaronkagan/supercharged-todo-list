@@ -194,13 +194,15 @@ const StyledMain = styled.main`
     gap: 1.2rem;
     border-radius: 0.6rem;
     font-size: 1.2rem;
-    padding: 2rem 1.4rem;
+    padding: 0rem 1.4rem;
 
     .text-input {
       outline: none;
       border: none;
       background-color: inherit;
       color: ${(props) => props.theme.todoColor};
+      width: 100%;
+      padding: 2.4rem 0;
     }
 
     .text-input::placeholder {
