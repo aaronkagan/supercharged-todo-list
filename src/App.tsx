@@ -259,6 +259,7 @@ const StyledTodoItem = styled.li`
   align-items: center;
   justify-content: space-between;
   padding: 1.6rem 2rem;
+  border-bottom: 1px solid ${(props) => props.theme.todoItemBorder};
 
   .container {
     display: flex;

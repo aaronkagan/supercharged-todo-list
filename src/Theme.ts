@@ -9,7 +9,8 @@ export const lightTheme = {
   todoColor: '#494C6B',
   todoPlaceholderColor: '#9495A5',
   todoListBottomColor: '#9495A5',
-  todoListBoxShadow: '0px 35px 50px -15px rgba(194, 195, 214, 0.5)'
+  todoListBoxShadow: '0px 35px 50px -15px rgba(194, 195, 214, 0.5)',
+  todoItemBorder: '#E3E4F1'
 };
 export const darkTheme = {
   bgColor: '#000',
@@ -19,5 +20,6 @@ export const darkTheme = {
   todoColor: '#C8CBE7',
   todoPlaceholderColor: '#767992',
   todoListBottomColor: '#5B5E7E',
-  todoListBoxShadow: 'unset'
+  todoListBoxShadow: 'unset',
+  todoItemBorder: '#393A4B'
 };
