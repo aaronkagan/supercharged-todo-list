@@ -149,6 +149,11 @@ function App() {
               </div>
             </StyledTodoList>
           ) : null}
+          <StyledFilterBar>
+            <span>All</span>
+            <span>Active</span>
+            <span>Completed</span>
+          </StyledFilterBar>
         </div>
       </StyledMain>
     </ThemeProvider>
@@ -220,14 +225,40 @@ const StyledTodoList = styled.ul`
   border-radius: 0.5rem;
   background-color: ${(props) => props.theme.todoBg};
   box-shadow: ${(props) => props.theme.todoListBoxShadow};
+  color: ${(props) => props.theme.todoColor};
 
   .todoListBottom {
+    color: ${(props) => props.theme.todoBottomColor};
     color: ${(props) => props.theme.todoListBottomColor};
+
     padding: 1.6rem 2rem;
     display: flex;
     justify-content: space-between;
     font-size: 1.2rem;
     letter-spacing: -0.167px;
+  }
+`;
+
+const StyledFilterBar = styled.div`
+  padding: 1.7rem;
+  background-color: ${(props) => props.theme.todoBg};
+  box-shadow: ${(props) => props.theme.todoListBoxShadow};
+  color: ${(props) => props.theme.todoListBottomColor};
+  display: flex;
+  border-radius: 0.5rem;
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.9rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.194px;
+
+  span {
+    cursor: pointer;
+
+    &:hover {
+      color: ${(props) => props.theme.todoColor};
+    }
   }
 `;
 
