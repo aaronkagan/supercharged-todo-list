@@ -28,6 +28,12 @@ function App() {
       : []
   );
 
+  const [filteredTodos, setFilteredTodos] = useState(todos);
+
+  useEffect(() => {
+    setFilteredTodos(todos);
+  }, [todos]);
+
   useEffect(() => {
     const savedTodos = JSON.parse(localStorage.getItem('todos')!); // the "! says that the result from local storage will not be null"
     setTodos(savedTodos);
@@ -105,9 +111,9 @@ function App() {
             />
           </form>
 
-          {todos.length ? (
+          {filteredTodos.length ? (
             <StyledTodoList>
-              {todos.map((elem) => {
+              {filteredTodos.map((elem) => {
                 return (
                   <StyledTodoItem key={JSON.stringify(elem.id)}>
                     <div className="container">
@@ -174,9 +180,21 @@ function App() {
             </StyledTodoList>
           ) : null}
           <StyledFilterBar>
-            <span>All</span>
-            <span>Active</span>
-            <span>Completed</span>
+            <span onClick={() => setFilteredTodos(todos)}>All</span>
+            <span
+              onClick={() =>
+                setFilteredTodos(todos.filter((elem) => !elem.isCompleted))
+              }
+            >
+              Active
+            </span>
+            <span
+              onClick={() =>
+                setFilteredTodos(todos.filter((elem) => elem.isCompleted))
+              }
+            >
+              Completed
+            </span>
           </StyledFilterBar>
         </div>
       </StyledMain>
