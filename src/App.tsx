@@ -12,8 +12,18 @@ import { lightTheme, darkTheme } from './Theme.ts';
 function App() {
   const [theme, setTheme] = useState('light');
   const handleToggleTheme = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
+    if (theme === 'light') {
+      setTheme('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      setTheme('light');
+      localStorage.setItem('theme', 'light');
+    }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('theme')) setTheme(localStorage.getItem('theme'));
+  }, []);
 
   interface TodoItem {
     id: number;
