@@ -219,7 +219,7 @@ const StyledMain = styled.main`
       background-color: inherit;
       color: ${(props) => props.theme.todoColor};
       width: 90%;
-      padding: 2.4rem 0;
+      padding: 2.2rem 0;
     }
 
     .text-input::placeholder {
