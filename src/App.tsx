@@ -51,7 +51,8 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem('todos', JSON.stringify(filteredTodos));
+  }, [todos, filteredTodos]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -211,6 +212,7 @@ function App() {
               onClick={() => {
                 handleFilterClick(filterRef1);
                 setFilteredTodos(todos);
+                localStorage.setItem('filteredTodos', JSON.stringify(todos));
               }}
             >
               All
@@ -220,6 +222,10 @@ function App() {
               onClick={() => {
                 handleFilterClick(filterRef2);
                 setFilteredTodos(todos.filter((elem) => !elem.isCompleted));
+                localStorage.setItem(
+                  'filteredTodos',
+                  JSON.stringify(todos.filter((elem) => !elem.isCompleted))
+                );
               }}
             >
               Active
@@ -229,6 +235,10 @@ function App() {
               onClick={() => {
                 handleFilterClick(filterRef3);
                 setFilteredTodos(todos.filter((elem) => elem.isCompleted));
+                localStorage.setItem(
+                  'filteredTodos',
+                  JSON.stringify(todos.filter((elem) => elem.isCompleted))
+                );
               }}
             >
               Completed
