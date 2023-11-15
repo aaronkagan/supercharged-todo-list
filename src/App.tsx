@@ -202,14 +202,23 @@ const StyledMain = styled.main`
     gap: 1.2rem;
     border-radius: 0.6rem;
     font-size: 1.2rem;
-    padding: 0rem 1.4rem;
+    padding: 0rem 2rem;
+
+    .submit {
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      background: none;
+      border-radius: 50%;
+      border: 1px solid ${(props) => props.theme.checkCircle};
+    }
 
     .text-input {
       outline: none;
       border: none;
       background-color: inherit;
       color: ${(props) => props.theme.todoColor};
-      width: 100%;
+      width: 90%;
       padding: 2.4rem 0;
     }
 
@@ -217,14 +226,6 @@ const StyledMain = styled.main`
       font-size: 1.2rem;
       letter-spacing: -0.167px;
       color: ${(props) => props.theme.todoPlaceholderColor};
-    }
-
-    .submit {
-      width: 2rem;
-      height: 2rem;
-      background: none;
-      border-radius: 50%;
-      border: 1px solid ${(props) => props.theme.checkCircle};
     }
   }
 `;
