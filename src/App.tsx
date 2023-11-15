@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, RefObject } from 'react';
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyles';
@@ -68,6 +68,22 @@ function App() {
           : todo;
       })
     );
+  };
+
+  const filterRef1 = useRef<HTMLElement>(null);
+  const filterRef2 = useRef<HTMLElement>(null);
+  const filterRef3 = useRef<HTMLElement>(null);
+  const filterRefs = [filterRef1, filterRef2, filterRef3];
+
+  const handleFilterClick = (ref: RefObject<HTMLElement>) => {
+    if (ref !== null && ref.current !== null) {
+      filterRefs.forEach((filterRef) => {
+        if (filterRef.current !== null) {
+          filterRef.current.classList.remove('active-filter-link');
+        }
+      });
+      ref.current.classList.add('active-filter-link');
+    }
   };
 
   return (
@@ -180,18 +196,30 @@ function App() {
             </StyledTodoList>
           ) : null}
           <StyledFilterBar>
-            <span onClick={() => setFilteredTodos(todos)}>All</span>
             <span
-              onClick={() =>
-                setFilteredTodos(todos.filter((elem) => !elem.isCompleted))
-              }
+              ref={filterRef1}
+              onClick={() => {
+                handleFilterClick(filterRef1);
+                setFilteredTodos(todos);
+              }}
+            >
+              All
+            </span>
+            <span
+              ref={filterRef2}
+              onClick={() => {
+                handleFilterClick(filterRef2);
+                setFilteredTodos(todos.filter((elem) => !elem.isCompleted));
+              }}
             >
               Active
             </span>
             <span
-              onClick={() =>
-                setFilteredTodos(todos.filter((elem) => elem.isCompleted))
-              }
+              ref={filterRef3}
+              onClick={() => {
+                handleFilterClick(filterRef3);
+                setFilteredTodos(todos.filter((elem) => elem.isCompleted));
+              }}
             >
               Completed
             </span>
@@ -330,6 +358,10 @@ const StyledTodoItem = styled.li`
 `;
 
 const StyledFilterBar = styled.div`
+  .active-filter-link {
+    color: #3a7cfd;
+  }
+
   padding: 1.7rem;
   background-color: ${(props) => props.theme.todoBg};
   box-shadow: ${(props) => props.theme.todoListBoxShadow};
