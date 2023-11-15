@@ -10,7 +10,7 @@ import Sun from './assets/images/icon-sun.svg';
 import { lightTheme, darkTheme } from './Theme.ts';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState<string | null>('light');
   const handleToggleTheme = () => {
     if (theme === 'light') {
       setTheme('dark');
