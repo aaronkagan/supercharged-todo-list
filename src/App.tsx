@@ -25,7 +25,7 @@ function App() {
     });
   };
 
-  const [theme, setTheme] = useState<string | null>('light');
+  const [theme, setTheme] = useState<string | null>('dark');
   const handleToggleTheme = () => {
     if (theme === 'light') {
       setTheme('dark');
@@ -100,12 +100,15 @@ function App() {
     }
   };
 
-  const handleDelete = (id: number): void => {
-    setTodos(
-      todos.filter((todo) => {
-        return id !== todo.id;
-      })
-    );
+  const handleDelete = (id: number, e): void => {
+    e.target.parentElement.classList.add('fall');
+    document.addEventListener('transitionend', () => {
+      setTodos(
+        todos.filter((todo) => {
+          return id !== todo.id;
+        })
+      );
+    });
   };
 
   const handleToggleDone = (id: number) => {
@@ -164,7 +167,10 @@ function App() {
             <StyledTodoList>
               {filteredTodos.map((elem) => {
                 return (
-                  <StyledTodoItem key={JSON.stringify(elem.id)}>
+                  <StyledTodoItem
+                    id="todo-item"
+                    key={JSON.stringify(elem.id)}
+                  >
                     <div className="container">
                       <div
                         className="mark-checked"
@@ -206,7 +212,7 @@ function App() {
                     <img
                       src={Cross}
                       role="button"
-                      onClick={() => handleDelete(elem.id)}
+                      onClick={(e) => handleDelete(elem.id, e)}
                     />
                   </StyledTodoItem>
                 );
@@ -330,6 +336,11 @@ const StyledMain = styled.main`
 `;
 
 const StyledTodoList = styled.ul`
+  .fall {
+    transform: translateY(10rem);
+    transition: all 0.5s;
+    opacity: 0;
+  }
   list-style-type: none;
   margin-top: 1.6rem;
   border-radius: 0.5rem;
