@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyles';
@@ -122,6 +122,35 @@ function App() {
     );
   };
 
+  // Drag and Drop
+
+  const dragItemIndex = useRef<number | null>(null);
+  const dragOverItemIndex = useRef<number | null>(null);
+
+  const handleDragSort = () => {
+    // Fixing splice type error. Splice won't accept a parameter of type <number | null>
+    if (dragItemIndex.current === null || dragOverItemIndex.current === null)
+      return;
+
+    // Doing this to not accidentally mutate original array
+    const copiedItems = [...todos];
+    // Splice returns an array but we need a string hence the [0] to grab the only item in the array
+    const draggedItemContent = copiedItems.splice(dragItemIndex.current, 1)[0];
+    copiedItems.splice(dragOverItemIndex.current, 0, draggedItemContent);
+
+    // Retting the refs
+    dragItemIndex.current = null;
+    dragOverItemIndex.current = null;
+
+    setTodos(copiedItems);
+  };
+
+  const handleDragStart = (index: number) => (dragItemIndex.current = index);
+  const handleDragEnter = (index: number) =>
+    (dragOverItemIndex.current = index);
+
+  //
+
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyle />
@@ -165,11 +194,23 @@ function App() {
 
           {filteredTodos.length ? (
             <StyledTodoList>
-              {filteredTodos.map((elem) => {
+              {filteredTodos.map((elem, index) => {
                 return (
                   <StyledTodoItem
                     id="todo-item"
                     key={JSON.stringify(elem.id)}
+                    draggable
+                    onDragStart={() => {
+                      handleDragStart(index);
+                    }}
+                    onDragEnter={() => {
+                      handleDragEnter(index);
+                    }}
+                    onDragEnd={() => {
+                      handleDragSort();
+                    }}
+                    // To prevent the item from ghosting back to original position before switching
+                    onDragOver={(e) => e.preventDefault()}
                   >
                     <div className="container">
                       <div
