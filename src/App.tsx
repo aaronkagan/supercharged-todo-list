@@ -560,6 +560,10 @@ const StyledTodoItem = styled.li`
     display: grid;
     place-items: center;
 
+    &:hover {
+      background: linear-gradient(135deg, #55ddff, #c058f3) !important;
+    }
+
     img {
       width: 7.25px;
     }
