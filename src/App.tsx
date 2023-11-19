@@ -29,10 +29,23 @@ function App() {
   const filterAllRef = useRef<HTMLElement>(null);
   const filterActiveRef = useRef<HTMLElement>(null);
   const filterCompletedRef = useRef<HTMLElement>(null);
+  const filterAllRefDesktop = useRef<HTMLElement>(null);
+  const filterActiveRefDesktop = useRef<HTMLElement>(null);
+  const filterCompletedRefDesktop = useRef<HTMLElement>(null);
   const filterRefs = [filterAllRef, filterActiveRef, filterCompletedRef];
+  const filterRefsDesktop = [
+    filterAllRefDesktop,
+    filterActiveRefDesktop,
+    filterCompletedRefDesktop
+  ];
 
   const handleResetFilterLinks = () => {
     filterRefs.forEach((filterRef) => {
+      if (filterRef.current !== null) {
+        filterRef.current.classList.remove('active-filter-link');
+      }
+    });
+    filterRefsDesktop.forEach((filterRef) => {
       if (filterRef.current !== null) {
         filterRef.current.classList.remove('active-filter-link');
       }
@@ -75,17 +88,26 @@ function App() {
       if (filterAllRef.current !== null) {
         filterAllRef.current.classList.add('active-filter-link');
       }
+      if (filterAllRefDesktop.current !== null) {
+        filterAllRefDesktop.current.classList.add('active-filter-link');
+      }
     }
     if (activeFilter.current === 'active') {
       setFilteredTodos(todos.filter((elem) => !elem.isCompleted));
       if (filterActiveRef.current !== null) {
         filterActiveRef.current.classList.add('active-filter-link');
       }
+      if (filterActiveRefDesktop.current !== null) {
+        filterActiveRefDesktop.current.classList.add('active-filter-link');
+      }
     }
     if (activeFilter.current === 'completed') {
       setFilteredTodos(todos.filter((elem) => elem.isCompleted));
       if (filterCompletedRef.current !== null) {
         filterCompletedRef.current.classList.add('active-filter-link');
+      }
+      if (filterCompletedRefDesktop.current !== null) {
+        filterCompletedRefDesktop.current.classList.add('active-filter-link');
       }
     }
   };
@@ -256,27 +278,41 @@ function App() {
                   </StyledTodoItem>
                 );
               })}
-              {/* <div className="todoListBottom">
-                <span>
-                  {todos.filter((elem) => !elem.isCompleted).length} items left
-                </span>
-                <span
-                  className="clear-completed"
-                  onClick={() =>
-                    setTodos((prevTodos) =>
-                      prevTodos.filter((elem) => !elem.isCompleted)
-                    )
-                  }
-                >
-                  Clear Completed
-                </span>
-              </div> */}
             </StyledTodoList>
           ) : null}
           <div className="todoListBottom">
             <span>
               {todos.filter((elem) => !elem.isCompleted).length} items left
             </span>
+            <StyledFilterBarDesktop>
+              <span
+                ref={filterAllRefDesktop}
+                onClick={() => {
+                  activeFilter.current = 'all';
+                  handleActiveFilter();
+                }}
+              >
+                All
+              </span>
+              <span
+                ref={filterActiveRefDesktop}
+                onClick={() => {
+                  activeFilter.current = 'active';
+                  handleActiveFilter();
+                }}
+              >
+                Active
+              </span>
+              <span
+                ref={filterCompletedRefDesktop}
+                onClick={() => {
+                  activeFilter.current = 'completed';
+                  handleActiveFilter();
+                }}
+              >
+                Completed
+              </span>
+            </StyledFilterBarDesktop>
             <span
               className="clear-completed"
               onClick={() =>
@@ -491,6 +527,20 @@ const StyledFilterBar = styled.div`
     &:hover {
       color: ${(props) => props.theme.todoColor};
     }
+  }
+
+  @media all and (min-width: 1000px) {
+    display: none;
+  }
+`;
+
+const StyledFilterBarDesktop = styled(StyledFilterBar)`
+  margin-top: 0;
+  padding: 0;
+  display: none;
+
+  @media all and (min-width: 1000px) {
+    display: flex;
   }
 `;
 
