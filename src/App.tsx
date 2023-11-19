@@ -499,6 +499,9 @@ const StyledMain = styled.main`
       .submit {
         width: 2.4rem;
         height: 2.4rem;
+        &:hover {
+          background: linear-gradient(135deg, #55ddff, #c058f3) !important;
+        }
       }
 
       .text-input {
