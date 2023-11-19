@@ -403,9 +403,8 @@ const StyledMain = styled.main`
     color: ${(props) => props.theme.todoListBottomColor};
     background-color: ${(props) => props.theme.todoBg};
     border-radius: 0 0 0.5rem 0.5rem;
-    /* margin-top: 1.6rem; */
 
-    padding: 1.6rem 2rem;
+    padding: 2rem;
     display: flex;
     justify-content: space-between;
     font-size: 1.2rem;
