@@ -1,9 +1,12 @@
 import bgMobileLight from './assets/images/bg-mobile-light.jpg';
 import bgMobileDark from './assets/images/bg-mobile-dark.jpg';
+import bgDesktopLight from './assets/images/bg-desktop-light.jpg';
+import bgDesktopDark from './assets/images/bg-desktop-dark.jpg';
 
 export const lightTheme = {
   bgColor: '#FAFAFA',
-  backgroundImage: bgMobileLight,
+  backgroundImageMobile: bgMobileLight,
+  backgroundImageDesktop: bgDesktopLight,
   checkCircle: '#e3e4f1',
   todoBg: '#fff',
   todoColor: '#494C6B',
@@ -14,7 +17,8 @@ export const lightTheme = {
 };
 export const darkTheme = {
   bgColor: '#000',
-  backgroundImage: bgMobileDark,
+  backgroundImageMobile: bgMobileDark,
+  backgroundImageDesktop: bgDesktopDark,
   checkCircle: '#393A4B',
   todoBg: '#25273D',
   todoColor: '#C8CBE7',

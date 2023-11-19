@@ -182,11 +182,13 @@ function App() {
               className="logo"
             >
               <img
+                className="logo"
                 src={Logo}
                 alt="Todo Logo"
               />
             </a>
             <img
+              className="moon-sun"
               role="button"
               onClick={handleToggleTheme}
               src={theme === 'light' ? Moon : Sun}
@@ -362,7 +364,7 @@ function App() {
 
 const StyledHeader = styled.header`
   min-height: 20rem;
-  background-image: url(${(props) => props.theme.backgroundImage});
+  background-image: url(${(props) => props.theme.backgroundImageMobile});
   background-size: cover;
   .wrapper {
     width: 85%;
@@ -379,6 +381,33 @@ const StyledHeader = styled.header`
 
   img {
     cursor: pointer;
+  }
+
+  .logo {
+    width: 10.8rem;
+  }
+
+  .moon-sun {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @media all and (min-width: 1000px) {
+    background-image: url(${(props) => props.theme.backgroundImageDesktop});
+    min-height: 30rem;
+
+    .container {
+      padding-top: 7rem;
+    }
+
+    .logo {
+      width: 16.7rem;
+    }
+
+    .moon-sun {
+      width: 2.6rem;
+      height: 2.6rem;
+    }
   }
 `;
 
@@ -449,6 +478,10 @@ const StyledMain = styled.main`
     .clear-completed {
       cursor: pointer;
     }
+  }
+
+  @media all and (min-width: 1000px) {
+    transform: translateY(-11.5rem);
   }
 `;
 
