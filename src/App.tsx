@@ -367,8 +367,7 @@ const StyledHeader = styled.header`
   background-image: url(${(props) => props.theme.backgroundImageMobile});
   background-size: cover;
   .wrapper {
-    width: 85%;
-    max-width: 54rem;
+    max-width: 32.7rem;
     margin: 0 auto;
   }
 
@@ -396,6 +395,10 @@ const StyledHeader = styled.header`
     background-image: url(${(props) => props.theme.backgroundImageDesktop});
     min-height: 30rem;
 
+    .wrapper {
+      max-width: 54rem;
+    }
+
     .container {
       padding-top: 7rem;
     }
@@ -415,8 +418,7 @@ const StyledMain = styled.main`
   transform: translateY(-9.3rem);
 
   .wrapper {
-    width: 85%;
-    max-width: 54rem;
+    max-width: 32.7rem;
     margin: 0 auto;
   }
   .form {
