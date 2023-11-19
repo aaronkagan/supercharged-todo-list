@@ -256,7 +256,7 @@ function App() {
                   </StyledTodoItem>
                 );
               })}
-              <div className="todoListBottom">
+              {/* <div className="todoListBottom">
                 <span>
                   {todos.filter((elem) => !elem.isCompleted).length} items left
                 </span>
@@ -270,9 +270,24 @@ function App() {
                 >
                   Clear Completed
                 </span>
-              </div>
+              </div> */}
             </StyledTodoList>
           ) : null}
+          <div className="todoListBottom">
+            <span>
+              {todos.filter((elem) => !elem.isCompleted).length} items left
+            </span>
+            <span
+              className="clear-completed"
+              onClick={() =>
+                setTodos((prevTodos) =>
+                  prevTodos.filter((elem) => !elem.isCompleted)
+                )
+              }
+            >
+              Clear Completed
+            </span>
+          </div>
           <StyledFilterBar>
             <span
               ref={filterAllRef}
@@ -348,6 +363,7 @@ const StyledMain = styled.main`
     border-radius: 0.6rem;
     font-size: 1.2rem;
     padding: 0rem 2rem;
+    margin-bottom: 1.6rem;
 
     .submit {
       cursor: pointer;
@@ -381,24 +397,13 @@ const StyledMain = styled.main`
     text-align: center;
     margin-top: 4rem;
   }
-`;
-
-const StyledTodoList = styled.ul`
-  .fall {
-    transform: translateY(10rem);
-    transition: all 0.5s;
-    opacity: 0;
-  }
-  list-style-type: none;
-  margin-top: 1.6rem;
-  border-radius: 0.5rem;
-  background-color: ${(props) => props.theme.todoBg};
-  box-shadow: ${(props) => props.theme.todoListBoxShadow};
-  color: ${(props) => props.theme.todoColor};
 
   .todoListBottom {
     color: ${(props) => props.theme.todoBottomColor};
     color: ${(props) => props.theme.todoListBottomColor};
+    background-color: ${(props) => props.theme.todoBg};
+    border-radius: 0 0 0.5rem 0.5rem;
+    /* margin-top: 1.6rem; */
 
     padding: 1.6rem 2rem;
     display: flex;
@@ -410,6 +415,20 @@ const StyledTodoList = styled.ul`
       cursor: pointer;
     }
   }
+`;
+
+const StyledTodoList = styled.ul`
+  .fall {
+    transform: translateY(10rem);
+    transition: all 0.5s;
+    opacity: 0;
+  }
+  list-style-type: none;
+  /* margin-top: 1.6rem; */
+  border-radius: 0.5rem 0.5rem 0 0;
+  background-color: ${(props) => props.theme.todoBg};
+  box-shadow: ${(props) => props.theme.todoListBoxShadow};
+  color: ${(props) => props.theme.todoColor};
 `;
 
 const StyledTodoItem = styled.li`
