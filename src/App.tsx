@@ -484,6 +484,10 @@ const StyledMain = styled.main`
 
   @media all and (min-width: 1000px) {
     transform: translateY(-11.5rem);
+
+    .wrapper {
+      max-width: 54rem;
+    }
   }
 `;
 
