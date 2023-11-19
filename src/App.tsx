@@ -122,7 +122,7 @@ function App() {
 
   const handleDelete = (
     id: number,
-    e: React.MouseEvent<HTMLButtonElement>
+    e: React.MouseEvent<HTMLImageElement>
   ): void => {
     e.currentTarget.parentElement?.classList.add('fall');
     document.addEventListener('transitionend', () => {
