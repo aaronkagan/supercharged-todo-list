@@ -500,10 +500,12 @@ const StyledMain = styled.main`
 
       .text-input {
         font-size: 1.8rem;
+        letter-spacing: -0.25px;
       }
 
       .text-input::placeholder {
         font-size: 1.8rem;
+        letter-spacing: -0.25px;
       }
     }
   }
@@ -577,6 +579,7 @@ const StyledTodoItem = styled.li`
 
     span {
       font-size: 1.8rem;
+      letter-spacing: -0.25px;
     }
 
     img {
