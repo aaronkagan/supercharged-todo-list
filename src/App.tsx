@@ -10,8 +10,22 @@ import Sun from './assets/images/icon-sun.svg';
 import { lightTheme, darkTheme } from './Theme.ts';
 
 function App() {
-  const activeFilter = useRef<string>('all');
+  interface TodoItem {
+    id: number;
+    title: string;
+    isCompleted: boolean;
+  }
 
+  const [todo, setTodo] = useState<string>('');
+  const [todos, setTodos] = useState<TodoItem[]>(
+    localStorage.getItem('todos')
+      ? JSON.parse(localStorage.getItem('todos')!)
+      : []
+  );
+  const [filteredTodos, setFilteredTodos] = useState(todos);
+  const [theme, setTheme] = useState<string | null>('dark');
+
+  const activeFilter = useRef<string>('all');
   const filterAllRef = useRef<HTMLElement>(null);
   const filterActiveRef = useRef<HTMLElement>(null);
   const filterCompletedRef = useRef<HTMLElement>(null);
@@ -25,7 +39,6 @@ function App() {
     });
   };
 
-  const [theme, setTheme] = useState<string | null>('dark');
   const handleToggleTheme = () => {
     if (theme === 'light') {
       setTheme('dark');
@@ -40,21 +53,6 @@ function App() {
     if (localStorage.getItem('theme')) setTheme(localStorage.getItem('theme'));
     handleActiveFilter();
   }, []);
-
-  interface TodoItem {
-    id: number;
-    title: string;
-    isCompleted: boolean;
-  }
-
-  const [todo, setTodo] = useState<string>('');
-  const [todos, setTodos] = useState<TodoItem[]>(
-    localStorage.getItem('todos')
-      ? JSON.parse(localStorage.getItem('todos')!)
-      : []
-  );
-
-  const [filteredTodos, setFilteredTodos] = useState(todos);
 
   useEffect(() => {
     setFilteredTodos(todos);
