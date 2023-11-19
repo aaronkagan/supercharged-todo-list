@@ -415,7 +415,7 @@ const StyledHeader = styled.header`
 `;
 
 const StyledMain = styled.main`
-  transform: translateY(-9.3rem);
+  transform: translateY(-10rem);
 
   .wrapper {
     max-width: 32.7rem;
@@ -483,7 +483,7 @@ const StyledMain = styled.main`
   }
 
   @media all and (min-width: 1000px) {
-    transform: translateY(-11.5rem);
+    transform: translateY(-13rem);
 
     .wrapper {
       max-width: 54rem;
@@ -557,6 +557,31 @@ const StyledTodoItem = styled.li`
   img {
     cursor: pointer;
     width: 1.2rem;
+  }
+
+  @media all and (min-width: 1000px) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    .container {
+      gap: 2.4rem;
+    }
+
+    .mark-checked {
+      width: 2.4rem;
+      height: 2.4rem;
+      img {
+        width: 11px;
+      }
+    }
+
+    span {
+      font-size: 1.8rem;
+    }
+
+    img {
+      width: 1.8rem;
+    }
   }
 `;
 
