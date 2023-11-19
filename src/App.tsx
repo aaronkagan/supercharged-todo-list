@@ -120,8 +120,11 @@ function App() {
     }
   };
 
-  const handleDelete = (id: number, e): void => {
-    e.target.parentElement.classList.add('fall');
+  const handleDelete = (
+    id: number,
+    e: React.MouseEvent<HTMLButtonElement>
+  ): void => {
+    e.currentTarget.parentElement?.classList.add('fall');
     document.addEventListener('transitionend', () => {
       setTodos(
         todos.filter((todo) => {
