@@ -304,6 +304,7 @@ function App() {
               Completed
             </span>
           </StyledFilterBar>
+          <p className="drag-text">Drag and drop to reorder list</p>
         </div>
       </StyledMain>
     </ThemeProvider>
@@ -373,6 +374,14 @@ const StyledMain = styled.main`
       letter-spacing: -0.167px;
       color: ${(props) => props.theme.todoPlaceholderColor};
     }
+  }
+
+  .drag-text {
+    color: ${(props) => props.theme.todoListBottomColor};
+    font-size: 1.4rem;
+    letter-spacing: -0.194px;
+    text-align: center;
+    margin-top: 4rem;
   }
 `;
 
