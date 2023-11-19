@@ -508,6 +508,16 @@ const StyledMain = styled.main`
         letter-spacing: -0.25px;
       }
     }
+
+    .todoListBottom {
+      font-size: 1.4rem;
+      letter-spacing: -0.194px;
+      padding: 2rem 2.4rem;
+
+      .clear-completed {
+        margin-left: -3.5rem;
+      }
+    }
   }
 `;
 
