@@ -488,6 +488,24 @@ const StyledMain = styled.main`
     .wrapper {
       max-width: 54rem;
     }
+
+    .form {
+      gap: 2.4rem;
+      padding: 0.1rem 2.4rem;
+
+      .submit {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+
+      .text-input {
+        font-size: 1.8rem;
+      }
+
+      .text-input::placeholder {
+        font-size: 1.8rem;
+      }
+    }
   }
 `;
 
