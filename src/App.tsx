@@ -69,6 +69,9 @@ function App() {
 
   useEffect(() => {
     setFilteredTodos(todos);
+
+    if (localStorage.getItem('todos') === null)
+      localStorage.setItem('todos', JSON.stringify([]));
   }, [todos]);
 
   useEffect(() => {
